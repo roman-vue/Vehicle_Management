@@ -20,7 +20,7 @@ async function bootstrap() {
     new ResponseInterceptor(),
     new TimeoutInterceptor(),
   );
-  app.useGlobalFilters(new AllExceptionFilter(Logger));
+  app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   app.setGlobalPrefix('api/v1/cirugia/');
@@ -34,6 +34,7 @@ async function bootstrap() {
   SwaggerConfig.ConfigSwaggerModule(app);
   let port = 3000;
   await app.listen(port, () => {
+    // Logger.debug(`${configService.get<string>('URI_MONGODB')}`);
     Logger.log('APP', `Cirugia is running on http://localhost:${port}`);
     Logger.debug(
       'APP',

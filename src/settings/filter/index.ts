@@ -4,8 +4,8 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
-import { LoggerService } from '../logger/logger.service';
 
 interface IError {
   message: string;
@@ -14,7 +14,7 @@ interface IError {
 
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
-  constructor(private readonly logger: LoggerService) {}
+  constructor() {}
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
@@ -49,7 +49,7 @@ export class AllExceptionFilter implements ExceptionFilter {
     exception: any,
   ) {
     if (status === 500) {
-      this.logger.error(
+      Logger.error(
         `End Request for ${request.path}`,
         `method=${request.method} status=${status} code=${
           message.status ? message.status : null
@@ -57,7 +57,7 @@ export class AllExceptionFilter implements ExceptionFilter {
         status >= 500 ? exception.stack : '',
       );
     } else {
-      this.logger.warn(
+      Logger.warn(
         `End Request for ${request.path}`,
         `method=${request.method} status=${status} code=${
           message.status ? message.status : null
