@@ -7,13 +7,45 @@ import {
 } from 'src/database/schemas/Vehicle/vehicle.schema';
 import { CreateVehicleDto, UpdateVehicleDto } from './dto/vehicle.dto';
 import { VehicleType } from 'src/utils/enum/vehicleType.enum';
+import { UsersService } from '../users/users.service';
+import {
+  History,
+  HistoryDocument,
+} from 'src/database/schemas/History/History.schema';
+import { UserDocument, Users } from 'src/database/schemas/Users/users.schema';
 
 @Injectable()
 export class VehicleService {
   constructor(
+    @InjectModel(History.name)
+    private readonly historyModel: Model<HistoryDocument>,
     @InjectModel(Vehicle.name)
     private readonly vehicleModel: Model<VehicleDocument>,
+    @InjectModel(Users.name)
+    private readonly usersModel: Model<UserDocument>,
   ) {}
+
+  public async assignVehicle(idUser: string, idVehicle) {
+    const verifyIdUser = await this.usersModel.findOne({ id: idUser });
+    const verifyIdVehicle = await this.getOneById(idVehicle);
+    verifyIdUser.currentVehicle = verifyIdVehicle;
+    let history = await this.historyModel.findOne({ name: verifyIdUser.name });
+    if (history == null) {
+      let newHistory = {
+        name: verifyIdUser.name,
+        lastName: verifyIdUser.lastName,
+        history: [verifyIdVehicle],
+      };
+      const saveHistory = new this.historyModel(newHistory);
+      await saveHistory.save();
+    } else {
+      history.history.push(verifyIdVehicle);
+      const saveHistory = new this.historyModel(history);
+      await saveHistory.save();
+    }
+    const assign = new this.usersModel(verifyIdUser);
+    const save = await assign.save();
+  }
 
   public async created(type: VehicleType, createVehicleDto: CreateVehicleDto) {
     createVehicleDto.vehicleType = type;

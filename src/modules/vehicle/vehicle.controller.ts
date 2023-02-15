@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -17,6 +18,15 @@ import { VehicleType } from 'src/utils/enum/vehicleType.enum';
 @Controller('vehicle')
 export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
+
+  @Patch(`assig-vehicle-to-user/:idUser/:idVehicle`)
+  public async assigVehicle(
+    @Param(`idUser`) idUser: string,
+    @Param(`idVehicle`) idVehicle: string,
+  ) {
+    const data = await this.vehicleService.assignVehicle(idUser, idVehicle);
+    return data;
+  }
 
   @Post('created-vehicle')
   @ApiQuery({ name: 'type', enum: VehicleType })
