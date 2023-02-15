@@ -24,8 +24,8 @@ export class CreateUserDto {
   @ApiProperty({ default: 'string' })
   @IsString()
   password: string;
-  @ApiProperty({ default: new Date().toISOString() })
-  @IsDate()
+  @ApiProperty({ default: `2023-02-14` })
+  @IsString()
   birthdate: Date;
   @ApiProperty({ default: '4343524' })
   @IsString()
@@ -36,9 +36,13 @@ export class CreateUserDto {
   @ApiProperty({ default: false })
   @IsBoolean()
   married: boolean;
-  @ApiProperty({ default: 302.0 })
-  @IsDecimal()
+  @ApiProperty({
+    description: 'Monthly income as a decimal number',
+    example: 2500.5,
+  })
+  @IsNumber()
   monthlyIncome: number;
+  currentVehicle: Object;
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

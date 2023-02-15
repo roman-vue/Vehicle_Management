@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from './dto/users.dto';
+import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
 @ApiTags(`USERS`)
 @Controller('users')
 export class UsersController {
@@ -17,37 +17,40 @@ export class UsersController {
 
   @Post('created')
   public async createUser(@Body() createUserDto: CreateUserDto) {
-    const data = await this.usersService;
+    const data = await this.usersService.created(createUserDto);
     return data;
   }
 
   @Get('get-all')
   public async getAll() {
-    const data = await this.usersService;
+    const data = await this.usersService.getAll();
     return data;
   }
 
   @Get('get-one/:id')
   public async getOne(@Param('id') id: string) {
-    const data = await this.usersService;
+    const data = await this.usersService.getOneById(id);
     return data;
   }
 
   @Get('get-one/:email')
   public async getOneByEmail(@Param('email') email: string) {
-    const data = await this.usersService;
+    const data = await this.usersService.getOneByEmail(email);
     return data;
   }
 
   @Put('updated/:id')
-  public async updateUser(@Param('id') id: string, @Body() create) {
-    const data = await this.usersService;
+  public async updateUser(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const data = await this.usersService.update(id, updateUserDto);
     return data;
   }
 
   @Delete('deleted/:id')
   public async delete(@Param('id') id: string) {
-    const data = await this.usersService;
+    const data = await this.usersService.delete(id);
     return data;
   }
 }

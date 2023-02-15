@@ -19,13 +19,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(
     new ResponseInterceptor(),
     new TimeoutInterceptor(),
+    new LoggingInterceptor(),
   );
   app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
-  app.setGlobalPrefix('api/v1/cirugia/');
+  app.setGlobalPrefix('api/v1/infinitum/');
   app.use(
-    '/api/v1/cirugia/docs',
+    '/api/v1/infinitum/docs',
     basicAuth({
       challenge: true,
       users: { user: configService.get<string>('SWAGGER_PASS') },
