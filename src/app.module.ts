@@ -3,9 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
-import { UsersModule } from './modules/users/users.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 const configService = new ConfigService();
 @Module({
   imports: [
@@ -16,6 +16,7 @@ const configService = new ConfigService();
     MongooseModule.forRoot(`${configService.get<string>('URI_MONGODB')}`),
     UsersModule,
     VehicleModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { BIKETYPE, VehicleType } from 'src/utils/enum/vehicleType.enum';
 
 export type VehicleDocument = HydratedDocument<Vehicle>;
 
@@ -15,10 +16,10 @@ export class Vehicle {
   model: string;
 
   @Prop()
-  numberDoors: string;
+  numberDoors: number;
 
   @Prop()
-  vehicleType: string;
+  vehicleType: VehicleType | BIKETYPE;
 }
 
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);

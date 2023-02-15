@@ -35,7 +35,7 @@ async function bootstrap() {
   let port = 3000;
   await app.listen(port, () => {
     // Logger.debug(`${configService.get<string>('URI_MONGODB')}`);
-    Logger.log('APP', `Cirugia is running on http://localhost:${port}`);
+    Logger.log('APP', `Infinitum is running on http://localhost:${port}`);
     Logger.debug(
       'APP',
       `Swagger is running on http://localhost:${port}/api/v1/infinitum/docs`,

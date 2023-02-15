@@ -25,7 +25,7 @@ export class Users {
   married: boolean;
   @Prop()
   monthlyIncome: number;
-  @Prop()
+  @Prop({ type: Object })
   currentVehicle: Object;
 }
 
