@@ -17,7 +17,7 @@ export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
   @Post('created')
-  public async createUser(@Body() createVehicleDto: CreateVehicleDto) {
+  public async createVehicle(@Body() createVehicleDto: CreateVehicleDto) {
     const data = await this.vehicleService;
     return data;
   }
@@ -34,8 +34,10 @@ export class VehicleController {
     return data;
   }
 
-  @Get('get-one/:email')
-  public async getOneByEmail(@Param('email') email: string) {
+  @Get('get-one/:vehiclePlate')
+  public async getOneByVehiclePlate(
+    @Param('vehiclePlate') vehiclePlate: string,
+  ) {
     const data = await this.vehicleService;
     return data;
   }

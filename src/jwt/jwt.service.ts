@@ -20,4 +20,12 @@ export class JwtService {
     );
     return { accessToken: generateAccess, refreshToken: generateRefresh };
   }
+
+  public async verifyToken(token: string) {
+    const verify = await jwt.verify(
+      token,
+      this.configService.get<string>('JWT_ACCESS'),
+    );
+    return verify;
+  }
 }
