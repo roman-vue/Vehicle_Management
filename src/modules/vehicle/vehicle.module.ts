@@ -12,9 +12,11 @@ import {
   History,
 } from 'src/database/schemas/History/History.schema';
 import { UserSchema, Users } from 'src/database/schemas/Users/users.schema';
+import { JwtModule } from 'src/jwt/jwt.module';
 
 @Module({
   imports: [
+    JwtModule,
     UsersModule,
     MongooseModule.forFeature([
       { name: Vehicle.name, schema: VehicleSchema },

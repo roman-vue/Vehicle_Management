@@ -13,6 +13,8 @@ import { ApiBasicAuth, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from './dto/users.dto';
 import { AccessGuard } from 'src/guards/access.guard';
 @ApiTags(`USERS`)
+@ApiBearerAuth()
+@UseGuards(AccessGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -22,8 +24,7 @@ export class UsersController {
     const data = await this.usersService.created(createUserDto);
     return data;
   }
-  @ApiBearerAuth()
-  @UseGuards(AccessGuard)
+
   @Get('get-all')
   public async getAll() {
     const data = await this.usersService.getAll();

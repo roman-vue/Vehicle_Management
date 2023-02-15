@@ -8,13 +8,17 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { VehicleService } from './vehicle.service';
 import { CreateVehicleDto, UpdateVehicleDto } from './dto/vehicle.dto';
 import { VehicleType } from 'src/utils/enum/vehicleType.enum';
+import { AccessGuard } from 'src/guards/access.guard';
 
 @ApiTags(`VEHICLE`)
+@ApiBearerAuth()
+@UseGuards(AccessGuard)
 @Controller('vehicle')
 export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
