@@ -1,3 +1,9 @@
+### SWAGGER
+```
+http://localhost:3000/api/v1/infinitum/docs
+```
+
+### .ENV
 ```
 APP_VERSION=v0.0.1
 
