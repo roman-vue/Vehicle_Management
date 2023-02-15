@@ -10,13 +10,13 @@ export class AuthController {
 
   @Post('sign-in')
   public async signIn(@Body() authDto: AuthDto) {
-    const data = await this.authService;
+    const data = await this.authService.signIn(authDto);
     return data;
   }
 
   @Post('sign-up')
   public async signUp(@Body() createUserDto: CreateUserDto) {
-    const data = await this.authService;
+    const data = await this.authService.signUp(createUserDto);
     return data;
   }
 }

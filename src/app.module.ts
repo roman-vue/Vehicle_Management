@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { JwtModule } from './jwt/jwt.module';
 const configService = new ConfigService();
 @Module({
   imports: [
@@ -17,6 +18,7 @@ const configService = new ConfigService();
     UsersModule,
     VehicleModule,
     AuthModule,
+    JwtModule,
   ],
 })
 export class AppModule {}
