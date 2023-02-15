@@ -6,6 +6,7 @@ import {
   VehicleDocument,
 } from 'src/database/schemas/Vehicle/vehicle.schema';
 import { CreateVehicleDto, UpdateVehicleDto } from './dto/vehicle.dto';
+import { VehicleType } from 'src/utils/enum/vehicleType.enum';
 
 @Injectable()
 export class VehicleService {
@@ -14,7 +15,8 @@ export class VehicleService {
     private readonly vehicleModel: Model<VehicleDocument>,
   ) {}
 
-  public async created(createVehicleDto: CreateVehicleDto) {
+  public async created(type: VehicleType, createVehicleDto: CreateVehicleDto) {
+    createVehicleDto.vehicleType = type;
     const newVehicle = new this.vehicleModel(createVehicleDto);
     const save = newVehicle.save();
     return save;
@@ -44,6 +46,7 @@ export class VehicleService {
   }
 
   public async update(
+    type: VehicleType,
     id: string,
     { vehiclePlate, branch, model, numberDoors, vehicleType }: UpdateVehicleDto,
   ) {
@@ -52,7 +55,7 @@ export class VehicleService {
     verifyId.branch = branch;
     verifyId.model = model;
     verifyId.numberDoors = numberDoors;
-    verifyId.vehicleType = vehicleType;
+    verifyId.vehicleType = type;
     const updateVehicle = new this.vehicleModel(verifyId);
     const save = updateVehicle.save();
     return save;

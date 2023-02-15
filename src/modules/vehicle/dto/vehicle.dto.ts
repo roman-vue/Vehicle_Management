@@ -1,29 +1,24 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsDate,
-  IsDecimal,
-  IsEmail,
-  IsNumber,
-  IsString,
-} from 'class-validator';
-import { BIKETYPE, VehicleType } from 'src/utils/enum/vehicleType.enum';
+import { IsNumber, IsString } from 'class-validator';
+import { VehicleType } from 'src/utils/enum/vehicleType.enum';
 
 export class CreateVehicleDto {
   @ApiProperty({ default: 'BRP39G' })
+  @IsString()
   vehiclePlate: string;
 
   @ApiProperty({ default: 'HONDA' })
-  branch: number;
+  @IsString()
+  branch: string;
 
   @ApiProperty({ default: 'DIO' })
+  @IsString()
   model: string;
 
   @ApiProperty({ default: 0 })
+  @IsNumber()
   numberDoors: number;
-
-  @ApiProperty({ default: BIKETYPE.SCOOTER })
-  vehicleType: VehicleType | BIKETYPE;
+  vehicleType: VehicleType;
 }
 
 export class UpdateVehicleDto extends PartialType(CreateVehicleDto) {}

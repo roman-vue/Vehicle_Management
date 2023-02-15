@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { BIKETYPE, VehicleType } from 'src/utils/enum/vehicleType.enum';
+import { VehicleType } from 'src/utils/enum/vehicleType.enum';
 
 export type VehicleDocument = HydratedDocument<Vehicle>;
 
@@ -10,7 +10,7 @@ export class Vehicle {
   vehiclePlate: string;
 
   @Prop()
-  branch: number;
+  branch: string;
 
   @Prop()
   model: string;
@@ -19,7 +19,7 @@ export class Vehicle {
   numberDoors: number;
 
   @Prop()
-  vehicleType: VehicleType | BIKETYPE;
+  vehicleType: VehicleType;
 }
 
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);
