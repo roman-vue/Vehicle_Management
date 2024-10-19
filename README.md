@@ -12,7 +12,7 @@ JWT_REFRESH=REFRESH
 
 SWAGGER_PASS=infinitum
 
-URI_MONGODB=mongodb+srv://rcalderin_lya:v1xrgUQMl8gyLQ12@cluster0.h12lp.mongodb.net/LYA?retryWrites=true&w=majority
+URI_MONGODB=uri
 ```
 
 ## PASO 1
