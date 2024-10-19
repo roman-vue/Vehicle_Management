@@ -15,24 +15,24 @@ SWAGGER_PASS=infinitum
 URI_MONGODB=uri
 ```
 
-## PASO 1
+## step 1
 ```
 npm install
 ```
-## PASO 2
+## step 2
 ```
 npm run start:dev
 ```
-## PASO 3
+## step 3
 ```
 ejecutar http://localhost:3000/api/v1/infinitum/auth/sign-in
 ```
 ![imagen](https://user-images.githubusercontent.com/55627800/219189963-cef85e11-1fec-4729-851a-44d3c6333e65.png)
-en caso de que quiera creaar otro usuario
+**in case you want to create another user**
 ```
 ejecutar http://localhost:3000/api/v1/infinitum/auth/sign-up
 ```
-### PASO 4
+### step 4
 ```
 copiar el accessToken y pegarlo en
 ```
